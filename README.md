@@ -30,7 +30,6 @@ The Twitter API only returns max 3200 tweets. This script may not be suitable if
    
    ```
    #!/bin/bash
-
    . env/bin/activate
    ```
 
@@ -42,7 +41,6 @@ The Twitter API only returns max 3200 tweets. This script may not be suitable if
    
    ```(env) admin@server:/volume1/configs/scripts$ which python
    (env) admin@server:~$ which python
-
    /volume1/homes/admin/env/bin/python
    ```
 
