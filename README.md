@@ -14,11 +14,11 @@ The Twitter API only returns max 3200 tweets. This script may not be suitable if
 
 ## Synology NAS install
 
-1. Enable SSH access via DSM
+1. Install the Python 3 package via DSM
 
-2. Install the Python 3 package via DSM
+2. Enable SSH access via DSM and log in as `admin`
 
-3. To use pip, create a Python virtual environment. \([credit](https://stackoverflow.com/questions/47649902/installing-pip-on-a-dsm-synology)).
+3. To use (and update) `pip`, create a Python virtual environment. \([credit](https://stackoverflow.com/questions/47649902/installing-pip-on-a-dsm-synology)).
    
    ```
    admin@server:~$ python3 -m venv env
@@ -28,9 +28,9 @@ The Twitter API only returns max 3200 tweets. This script may not be suitable if
    
 4. Install Tweepy  `pip install tweepy`
 
-5. Put the configured **TweetExpire.py** script somewhere on your NAS
+5. Put the configured `TweetExpire.py` script somewhere on your NAS
 
-6. Create a script to run the script inside your virtual Python (use script path from your own setup)
+6. Create a script to run the script inside your virtual Python
    
    ```bash
    #!/bin/bash
@@ -38,7 +38,7 @@ The Twitter API only returns max 3200 tweets. This script may not be suitable if
    python /volume1/configs/scripts/TweetExpire.py
    ```
 
-7. If it works, create a scheduled task in Synology DSM to run the script as admin user.
+7. If it works, create a scheduled task in Synology DSM to run the script as `admin` user.
 
 ## Acknowledgements
 
