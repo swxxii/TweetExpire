@@ -41,6 +41,16 @@ def deleter(tw, idNo):
         api.destroy_status(idNo)
 
 
+def clean(text):
+    # normalise whitespace
+    text = text.replace("\r\n", " ")
+    text = text.replace("\r", " ")
+    text = text.replace("\n", " ")
+    text = text.replace("  ", " ")
+    # strip non-ascii chars
+    return ''.join([i if ord(i) < 128 else ' ' for i in text])
+
+
 auth = tweepy.OAuthHandler(api_key, api_secret)
 auth.set_access_token(access_token_key, access_token_secret)
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
@@ -51,20 +61,19 @@ unrt = 0
 
 for tw in tweepy.Cursor(api.user_timeline, id=username).items():
     count += 1
-    text = tw.text.replace("\r\n", " ").replace(
-        "\r", " ").replace("\n", " ").replace("  ", " ")[:80]+"..."
+    text = clean(tw.text)[:80] + "..."
     age = (datetime.now() - tw.created_at).days
     sage = "("+str(age)+") "
     if tw.id in protected:
         if verbose:
-            print("[ KEEP ] "+tw.created_at.strftime("%Y-%m-%d ")+sage+text)
+            print("[ KEEP ] " + tw.created_at.strftime("%Y-%m-%d ") + sage + text)
     if age >= delete_after:
-        print("[DELETE] "+tw.created_at.strftime("%Y-%m-%d ")+sage+text)
+        print("[DELETE] " + tw.created_at.strftime("%Y-%m-%d ") + sage + text)
         deleter(tw, tw.id)
         dels += 1
     else:
         if verbose:
-            print("[ SKIP ] "+tw.created_at.strftime("%Y-%m-%d ")+sage+text)
+            print("[ SKIP ] "+tw.created_at.strftime("%Y-%m-%d ") + sage + text)
 
 print("[ DONE ] Processed {:d} tweets: {:d} deleted.".format(
     count, dels))
