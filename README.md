@@ -4,7 +4,7 @@ A python script to delete your tweets once they reach a certain age (number of d
 
 The Twitter API only returns max 3200 tweets. This script may not be suitable if you want to delete really old tweets past this limit. For that, try [TweetDeleter](https://github.com/Guerillero/TweetDeleter) by Guerillero.
 
-## Getting started/basic Linux install
+## Basic Linux install
 
 1. [Register a Twitter App](https://developer.twitter.com/en/apps) and get the API keys.
 2. Install Python and tweepy. I use Python 3.   
@@ -14,31 +14,23 @@ The Twitter API only returns max 3200 tweets. This script may not be suitable if
 
 ## Synology NAS install
 
-1. Install the Python 3 package via DSM
+1. Install the Python 3 package via DSM. (3.8.2 used)
 
 2. Enable SSH access via DSM and log in as `admin`
 
-3. To use (and update) `pip`, create a Python virtual environment. \([credit](https://stackoverflow.com/questions/47649902/installing-pip-on-a-dsm-synology)).
-   
-   ```
-   admin@server:~$ python3 -m venv env
-   admin@server:~$ . env/bin/activate
-   (env) admin@server:~$ pip install --upgrade pip
-   ```
-   
-4. Install Tweepy  `pip install tweepy`
+3. Invoke pip using this command to install the tweepy module
 
-5. Put the configured `TweetExpire.py` script somewhere on your NAS
+    ```
+    admin@server:~$ /volume1/\@appstore/py3k/usr/local/bin/pip3 install tweepy
+    ```
 
-6. Create a script to run the script inside your virtual Python
-   
-   ```bash
-   #!/bin/bash
-   . env/bin/activate
-   python /volume1/configs/scripts/TweetExpire.py
-   ```
+5. Put the configured `TweetExpire.py` script somewhere on your NAS.
 
-7. If it works, create a scheduled task in Synology DSM to run the script as `admin` user.
+6. Test it manually from the shell to make sure it works.
+    ```
+    admin@server:~$ python3 /volume1/configs/scripts/TweetExpire.py
+    ```
+6. Create a cron job (scheduled task) in Synology DSM with the above command to run as `admin` user. 
 
 ## Acknowledgements
 
