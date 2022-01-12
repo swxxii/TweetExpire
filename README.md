@@ -8,7 +8,7 @@ The Twitter API only returns max 3200 tweets. This script may not be suitable if
 
 1. [Register a Twitter App](https://developer.twitter.com/en/apps) and get the API keys.
 2. Assume you have installed Python and pip. 
-3. Install tweepy package  `pip3 install tweepy`
+3. Install tweepy package  `pip3 install -r requirements.txt`
 3. Enter config info in the script.
 4. Run the script `./TweetExpire.py`
 
